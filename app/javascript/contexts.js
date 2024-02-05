@@ -1,9 +1,7 @@
 import { createContext } from "react";
-import { TodoAction, TodoFilters } from "./todos_helper";
-import { Dispatch, useContext } from "react";
+import { useContext } from "react";
 
-
-export const DispatchContext = createContext<Dispatch<TodoAction> | null>(null);
+export const DispatchContext = createContext(null);
 
 export function useDispatchContext() {
   const dispatch = useContext(DispatchContext);
@@ -11,12 +9,7 @@ export function useDispatchContext() {
   return dispatch;
 }
 
-interface FilterContextType {
-  filter: TodoFilters;
-  onFilterClick: (f: TodoFilters) => void;
-}
-
-export const FilterContext = createContext<FilterContextType | null>(null);
+export const FilterContext = createContext(null);
 
 export function useFilterContext() {
   const filter = useContext(FilterContext);

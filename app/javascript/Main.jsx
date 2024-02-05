@@ -1,8 +1,9 @@
-import { Todo as TodoType, activeCount } from "./todos_helper";
+import React from "react";
+import { activeCount } from "./todos_helper";
 import { useDispatchContext } from "./contexts";
 import Todo from "./Todo";
 
-const Main = ({ todos } : { todos: TodoType[] }) => {
+const Main = ({ todos }) => {
   const dispatch = useDispatchContext();
 
   function handleToggle() {

@@ -1,8 +1,8 @@
+import React from "react";
 import { useDispatchContext } from "./contexts";
 import Filter from "./Filter";
-import { TodoFilters } from "./todos_helper";
 
-const Footer = ({ activeCount, showClear }: {activeCount: number, showClear: boolean}) => {
+const Footer = ({ activeCount, showClear }) => {
   const dispatch = useDispatchContext();
 
   function handleClearCompleted() {
@@ -20,7 +20,7 @@ const Footer = ({ activeCount, showClear }: {activeCount: number, showClear: boo
       </span>
       <ul className="filters">
         {["All", "Active", "Completed"].map(f => {
-          return <Filter key={f} thisFilter={f as TodoFilters} />;
+          return <Filter key={f} thisFilter={f} />;
         })}
       </ul>
       {showClear && <button className="clear-completed" onClick={handleClearCompleted}>Clear completed</button>}

@@ -1,20 +1,16 @@
 import { flushSync } from "react-dom";
 import { useDispatchContext } from "./contexts";
-import { Todo as TodoType } from "./todos_helper";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
-type Status = "readOnly" | "editing";
-type InputRef = HTMLInputElement | null;
-
-function getCurrent(ref: React.MutableRefObject<InputRef>) {
+function getCurrent(ref) {
   if (!ref.current) throw Error("Ref is not assigned");
   return ref.current;
 }
 
-const Todo = ({ id, content, isCompleted } : TodoType) => {
+const Todo = ({ id, content, isCompleted }) => {
   const dispatch = useDispatchContext();
-  const [status, setStatus] = useState<Status>("readOnly");
-  const inputRef = useRef<InputRef>(null);
+  const [status, setStatus] = useState("readOnly");
+  const inputRef = useRef(null);
 
   function handleCheck() {
     dispatch({
@@ -30,7 +26,7 @@ const Todo = ({ id, content, isCompleted } : TodoType) => {
     });
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e) {
     dispatch({
       type: "updateContent",
       content: e.target.value,

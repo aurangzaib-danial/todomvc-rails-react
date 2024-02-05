@@ -1,7 +1,7 @@
+import React from "react";
 import { useFilterContext } from "./contexts";
-import { TodoFilters } from "./todos_helper";
 
-export default function Filter ({thisFilter}: {thisFilter: TodoFilters}) {
+export default function Filter ({thisFilter}) {
   const filterContext = useFilterContext();
 
   return (

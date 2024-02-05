@@ -1,18 +1,4 @@
-export interface Todo {
-  id: string;
-  content: string;
-  isCompleted: boolean;
-}
-
-export type TodoAction =
-  | { type: "create", todo: Todo }
-  | { type: "markAllComplete" | "markAllActive" | "clearCompleted" }
-  | { type: "updateContent", content: string, id: string}
-  | { type: "updateStatus", id: string}
-  | { type: "clearCompleted" }
-  | { type: "destroy", id: string};
-
-export function todosReducer(state: Todo[], action: TodoAction) {
+export function todosReducer(state, action) {
   switch (action.type) {
     case "create": {
       return [...state, action.todo];
@@ -54,9 +40,7 @@ export function todosReducer(state: Todo[], action: TodoAction) {
   }
 }
 
-export type TodoFilters = "All" | "Active" | "Completed";
-
-export function filterTodos(todos: Todo[], filter: TodoFilters) {
+export function filterTodos(todos, filter) {
   switch(filter) {
     case "All": return todos;
     case "Active": return todos.filter(t => !t.isCompleted);
@@ -64,10 +48,10 @@ export function filterTodos(todos: Todo[], filter: TodoFilters) {
   }
 }
 
-export function activeCount(todos: Todo[]) {
+export function activeCount(todos) {
   return todos.reduce((acc, todo) => todo.isCompleted ? acc : acc + 1, 0);
 }
 
-export function someCompleted(todos: Todo[]) {
+export function someCompleted(todos) {
   return todos.some(todo => todo.isCompleted);
 }

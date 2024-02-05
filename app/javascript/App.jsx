@@ -1,5 +1,5 @@
-import { useState, useReducer } from "react";
-import { activeCount, filterTodos, someCompleted, TodoFilters, todosReducer } from "./todos_helper";
+import React, { useState, useReducer } from "react";
+import { activeCount, filterTodos, someCompleted, todosReducer } from "./todos_helper";
 import { DispatchContext, FilterContext } from "./contexts";
 import Header from "./Header";
 import Main from "./Main";
@@ -7,10 +7,10 @@ import Footer from "./Footer";
 
 export default function App() {
   const [todos, dispatch] = useReducer(todosReducer, []);
-  const [filter, setFilter] = useState<TodoFilters>("All");
+  const [filter, setFilter] = useState("All");
   const filteredTodos = filterTodos(todos, filter);
   
-  function onFilterClick(f: TodoFilters) {
+  function onFilterClick(f) {
     setFilter(f);
   }
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatchContext } from "./contexts";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -6,7 +6,7 @@ export default function Header() {
   const [newTodo, setNewTodo] = useState("");
   const dispatch = useDispatchContext();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e) {
     e.preventDefault();
     dispatch({
       type: "create",
