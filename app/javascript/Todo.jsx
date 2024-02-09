@@ -1,6 +1,7 @@
 import { flushSync } from "react-dom";
 import { useDispatchContext } from "./contexts";
 import React, { useRef, useState } from "react";
+import { destroy, patch } from "@rails/request.js";
 
 function getCurrent(ref) {
   if (!ref.current) throw Error("Ref is not assigned");
@@ -17,6 +18,8 @@ const Todo = ({ id, content, isCompleted }) => {
       type: "updateStatus",
       id
     });
+
+    patch(`/todos/${id}`, { body: JSON.stringify({ is_completed: !isCompleted }) });
   }
 
   function handleDestroy() {
@@ -24,6 +27,8 @@ const Todo = ({ id, content, isCompleted }) => {
       type: "destroy",
       id
     });
+
+    destroy(`/todos/${id}`)
   }
 
   function handleChange(e) {
@@ -49,6 +54,8 @@ const Todo = ({ id, content, isCompleted }) => {
           setStatus("readOnly");
           if (content === "") {
             handleDestroy();
+          } else {
+            patch(`/todos/${id}`, { body: JSON.stringify({ content }) });
           }
         }
       }}>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatchContext } from "./contexts";
 import Filter from "./Filter";
+import { destroy } from "@rails/request.js";
 
 const Footer = ({ activeCount, showClear }) => {
   const dispatch = useDispatchContext();
@@ -9,6 +10,8 @@ const Footer = ({ activeCount, showClear }) => {
     dispatch({
       type: "clearCompleted"
     });
+
+    destroy('/todos');
   }
 
   return (

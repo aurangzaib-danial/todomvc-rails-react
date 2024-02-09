@@ -1,9 +1,10 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { activeCount, filterTodos, someCompleted, todosReducer } from "./todos_helper";
 import { DispatchContext, FilterContext } from "./contexts";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
+import { get } from "@rails/request.js";
 
 export default function App() {
   const [todos, dispatch] = useReducer(todosReducer, []);
@@ -13,6 +14,22 @@ export default function App() {
   function onFilterClick(f) {
     setFilter(f);
   }
+
+  useEffect(() => {
+    async function fetchTodos() {
+      const response = await get('/todos', { responseKind: "json" });
+      
+      if (response.ok) {
+        const todos = await response.json;
+        dispatch({
+          type: "initialTodos",
+          todos
+        });
+      }
+    }
+    
+    fetchTodos();
+  }, []);
 
   return (
     <>

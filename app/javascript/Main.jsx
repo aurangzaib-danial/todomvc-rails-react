@@ -2,6 +2,7 @@ import React from "react";
 import { activeCount } from "./todos_helper";
 import { useDispatchContext } from "./contexts";
 import Todo from "./Todo";
+import { patch } from "@rails/request.js";
 
 const Main = ({ todos }) => {
   const dispatch = useDispatchContext();
@@ -11,15 +12,20 @@ const Main = ({ todos }) => {
       return;
     }
 
+    let actionType;
     if (activeCount(todos) >= 1) {
-      dispatch({
-        type: "markAllComplete"
-      });
+      actionType = "markAllComplete";
     } else {
-      dispatch({
-        type: "markAllActive"
-      });
+      actionType = "markAllActive";
     }
+
+    dispatch({
+      type: actionType
+    });
+
+    const toggle = actionType === "markAllComplete" ? true : false;
+
+    patch('/todos/toggle-all', { body: JSON.stringify({toggle}) });
   }
 
   return (

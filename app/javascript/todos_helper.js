@@ -1,5 +1,17 @@
 export function todosReducer(state, action) {
   switch (action.type) {
+    case "initialTodos": {
+      return action.todos;
+    }
+    case "updateId": {
+      const newTodos = state.map(todo => {
+        if (todo.id === action.oldId) {
+          return { ...todo, id: action.newId };
+        }
+        return todo;
+      });
+      return newTodos;
+    }
     case "create": {
       return [...state, action.todo];
     }

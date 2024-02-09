@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./react_entrypoint"
+import "@rails/request.js"
