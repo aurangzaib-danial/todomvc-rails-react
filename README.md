@@ -1,24 +1,2 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This project is my version of [todomvc](https://todomvc.com/) with Ruby on Rails and React. I have been wanting to try a hybrid approach in making a web app where Ruby on Rails takes care of everything and you use React for pieces that require heavy user interface logic. In this app, local representation of todos is implemented through React and in the background local state is persisted to a rails database as well.
